@@ -69,7 +69,7 @@ class Main extends PluginBase implements Listener{
     public function createFactionForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = new SimpleForm(function (Player $player, $data) {
-            $player = $event->getPlayer();
+            
             $result = $data[0];
             if($result != null){
                 $this->factionName = $result;
@@ -180,7 +180,7 @@ class Main extends PluginBase implements Listener{
     public function demoteForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = new SimpleForm(function (Player $player, $data) {
-            $player = $event->getPlayer();
+            
             $result = $data[0];
             if($result != null){
                 $this->playerName = $result;
@@ -195,7 +195,7 @@ class Main extends PluginBase implements Listener{
     public function kickForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = new SimpleForm(function (Player $player, $data) {
-            $player = $event->getPlayer();
+            
             $result = $data[0];
             if($result != null){
                 $this->playerName = $result;
@@ -210,7 +210,7 @@ class Main extends PluginBase implements Listener{
     public function leaderForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = new SimpleForm(function (Player $player, $data) {
-            $player = $event->getPlayer();
+            
             $result = $data[0];
             if($result != null){
                 $this->leaderName = $result;
@@ -225,7 +225,7 @@ class Main extends PluginBase implements Listener{
     public function promoteForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = new SimpleForm(function (Player $player, $data) {
-            $player = $event->getPlayer();
+            
             $result = $data[0];
             if($result != null){
                 $this->luckyPerson = $result;
@@ -240,7 +240,7 @@ class Main extends PluginBase implements Listener{
     public function allyForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = new SimpleForm(function (Player $player, $data) {
-            $player = $event->getPlayer();
+            
             $result = $data[0];
             if($result != null){
                 $this->factionName = $result;
@@ -255,7 +255,7 @@ class Main extends PluginBase implements Listener{
     public function breakAllianceForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = new SimpleForm(function (Player $player, $data) {
-            $player = $event->getPlayer();
+            
             $result = $data[0];
             if($result != null){
                 $this->factionName = $result;
@@ -270,7 +270,7 @@ class Main extends PluginBase implements Listener{
     public function inviteForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = new SimpleForm(function (Player $player, $data) {
-            $player = $event->getPlayer();
+            
             $result = $data[0];
             if($result != null){
                 $this->playerName = $result;
@@ -382,7 +382,7 @@ class Main extends PluginBase implements Listener{
     public function factionInfoForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = new SimpleForm(function (Player $player, $data) {
-            $player = $event->getPlayer();
+            
             $result = $data[0];
             if($result != null){
                 $this->playerName = $result;
@@ -397,7 +397,7 @@ class Main extends PluginBase implements Listener{
     public function membersOf(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = new SimpleForm(function (Player $player, $data) {
-            $player = $event->getPlayer();
+            
             $result = $data[0];
             if($result != null){
                 $this->playerName = $result;
@@ -412,7 +412,7 @@ class Main extends PluginBase implements Listener{
     public function officersOf(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = new SimpleForm(function (Player $player, $data) {
-            $player = $event->getPlayer();
+            
             $result = $data[0];
             if($result != null){
                 $this->playerName = $result;
@@ -427,7 +427,7 @@ class Main extends PluginBase implements Listener{
     public function leaderOf(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = new SimpleForm(function (Player $player, $data) {
-            $player = $event->getPlayer();
+            
             $result = $data[0];
             if($result != null){
                 $this->playerName = $result;
