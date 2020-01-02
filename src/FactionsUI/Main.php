@@ -8,6 +8,8 @@ use pocketmine\event\Listener;
 use pocketmine\{command\ConsoleCommandSender, Server, Player, utils\TextFormat};
 use pocketmine\plugin\PluginBase;
 
+use jojoe77777\FormAPI\SimpleForm;
+
 class Main extends PluginBase implements Listener{
 
     public function onEnable(){
