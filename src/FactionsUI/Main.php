@@ -12,40 +12,40 @@ class Main extends PluginBase implements Listener{
 
     public function onEnable(){
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getLogger()->info("FactionsUI made By QuiverlyRivalry\nThis is a private plugin, want more plugins?\n Contact here QuiverlyRivalry#4535\n on Discord!");
+        $this->getLogger()->info("FactionsUI enabled!");
     }
 
-    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
-        $player = $sender->getPlayer();
+    public function onCommand(CommandSender $player, Command $command, string $label, array $args) : bool{
+        $player = $player->getPlayer();
         switch($command->getName()){
             case "fui":
                 $this->menuForm($player);
         }
         return true;
-    } 
-    
+    }
+
     //plan2 todo
 
-    public function menuForm($player){
+    public function menuForm(Player $player){
         if($player instanceof Player){
             $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-            $form = $api->createSimpleForm(function (Player $sender, array $data){
+            $form = new SimpleForm(function (Player $player, $data) {
                 if(isset($data[0])){
                     switch($data[0]){
                         case 0:
                             //Create a Faction
-                            $this->createFactionForm($sender);
+                            $this->createFactionForm($player);
                             break;
                         case 1:
                             //Leader Commands
-                            $this->leaderCommandForm($sender);
+                            $this->leaderCommandForm($player);
                             break;
                         case 2:
                             //Officer Commands
-                            $this->officerCommandForm($sender);
+                            $this->officerCommandForm($player);
                             break;
                         case 3:
-                            $this->generalCommandForm($sender);
+                            $this->generalCommandForm($player);
                             break;
                         case 4:
                             //Exit
@@ -64,9 +64,9 @@ class Main extends PluginBase implements Listener{
         }
     }
 
-    public function createFactionForm($player){
+    public function createFactionForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createCustomForm(function (Player $event, array $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $player = $event->getPlayer();
             $result = $data[0];
             if($result != null){
@@ -79,77 +79,77 @@ class Main extends PluginBase implements Listener{
         $form->sendToPlayer($player);
     }
 
-    public function leaderCommandForm($player){
+    public function leaderCommandForm(Player $player){
         if($player instanceof Player){
             $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-            $form = $api->createSimpleForm(function (Player $sender, array $data){
+            $form = new SimpleForm(function (Player $player, $data) {
                 if(isset($data[0])){
                     switch($data[0]){
                         case 0:
                             //f claim
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f claim");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f claim");
                             break;
                         case 1:
                             //f demote
                             //
-                            $this->demoteForm($sender);
+                            $this->demoteForm($player);
                             break;
                         case 2:
                             //f kick
                             //
-                            $this->kickForm($sender);
+                            $this->kickForm($player);
                             break;
                         case 3:
                             //f leader
                             //
-                            $this->leaderForm($sender);
+                            $this->leaderForm($player);
                             break;
                         case 4:
                             //f sethome
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f sethome");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f sethome");
                             break;
                         case 5:
                             //f unclaim
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f unclaim");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f unclaim");
                             break;
                         case 6:
                             //f unsethome
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f unsethome");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f unsethome");
                             break;
                         case 7:
                             //f desc
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f desc");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f desc");
                             break;
                         case 8:
                             //f promote
                             //
-                            $this->promoteForm($sender);
+                            $this->promoteForm($player);
                             break;
                         case 9:
                             //f allywith <faction>
                             //
-                            $this->allyForm($sender);
+                            $this->allyForm($player);
                             break;
                         case 10:
                             //f allyok
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f allyok");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f allyok");
                             break;
                         case 11:
                             //f allyno
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f allyno");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f allyno");
                             break;
                         case 12:
                             //f breakalliancewith <faction>
                             //
-                            $this->breakAllianceForm($sender);
+                            $this->breakAllianceForm($player);
                             break;
                         case 13:
                             //f delete
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f del");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f del");
                             break;
                         case 14:
                             //Back
-                            $this->menuForm($sender);
+                            $this->menuForm($player);
                             break;
                     }
                 }
@@ -175,9 +175,9 @@ class Main extends PluginBase implements Listener{
         }
     }
 
-    public function demoteForm($player){
+    public function demoteForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createCustomForm(function (Player $event, array $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $player = $event->getPlayer();
             $result = $data[0];
             if($result != null){
@@ -190,9 +190,9 @@ class Main extends PluginBase implements Listener{
         $form->sendToPlayer($player);
     }
 
-    public function kickForm($player){
+    public function kickForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createCustomForm(function (Player $event, array $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $player = $event->getPlayer();
             $result = $data[0];
             if($result != null){
@@ -205,9 +205,9 @@ class Main extends PluginBase implements Listener{
         $form->sendToPlayer($player);
     }
 
-    public function leaderForm($player){
+    public function leaderForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createCustomForm(function (Player $event, array $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $player = $event->getPlayer();
             $result = $data[0];
             if($result != null){
@@ -220,9 +220,9 @@ class Main extends PluginBase implements Listener{
         $form->sendToPlayer($player);
     }
 
-    public function promoteForm($player){
+    public function promoteForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createCustomForm(function (Player $event, array $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $player = $event->getPlayer();
             $result = $data[0];
             if($result != null){
@@ -235,9 +235,9 @@ class Main extends PluginBase implements Listener{
         $form->sendToPlayer($player);
     }
 
-    public function allyForm($player){
+    public function allyForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createCustomForm(function (Player $event, array $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $player = $event->getPlayer();
             $result = $data[0];
             if($result != null){
@@ -250,9 +250,9 @@ class Main extends PluginBase implements Listener{
         $form->sendToPlayer($player);
     }
 
-    public function breakAllianceForm($player){
+    public function breakAllianceForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createCustomForm(function (Player $event, array $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $player = $event->getPlayer();
             $result = $data[0];
             if($result != null){
@@ -265,9 +265,9 @@ class Main extends PluginBase implements Listener{
         $form->sendToPlayer($player);
     }
 
-    public function inviteForm($player){
+    public function inviteForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createCustomForm(function (Player $event, array $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $player = $event->getPlayer();
             $result = $data[0];
             if($result != null){
@@ -280,18 +280,18 @@ class Main extends PluginBase implements Listener{
         $form->sendToPlayer($player);
     }
 
-    public function officerCommandForm($player){
+    public function officerCommandForm(Player $player){
         if($player instanceof Player){
             $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-            $form = $api->createSimpleForm(function (Player $sender, array $data){
+            $form = new SimpleForm(function (Player $player, $data) {
                 if(isset($data[0])){
                     switch($data[0]){
                         case 0:
                             //Invite Someone
-                            $this->inviteForm($sender);
+                            $this->inviteForm($player);
                             break;
                         case 1:
-                            $this->menuForm($sender);
+                            $this->menuForm($player);
                             break;
                     }
                 }
@@ -304,59 +304,59 @@ class Main extends PluginBase implements Listener{
         }
     }
 
-    public function generalCommandForm($player){
+    public function generalCommandForm(Player $player){
         if($player instanceof Player){
             $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-            $form = $api->createSimpleForm(function (Player $sender, array $data){
+            $form = new SimpleForm(function (Player $player, $data) {
                 if(isset($data[0])){
                     switch($data[0]){
                         case 0:
                             //Info about a faction
                             //
-                            $this->factionInfoForm($sender);
+                            $this->factionInfoForm($player);
                             break;
                         case 1:
                             //f ourmembers
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f ourmembers");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f ourmembers");
                             break;
                         case 2:
                             //f ourofficerss
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f ourofficers");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f ourofficers");
                             break;
                         case 3:
                             //f ourleader
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f ourleader");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f ourleader");
                             break;
                         case 4:
                             //f allies
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f allies");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f allies");
                             break;
                         case 5:
                             //f membersof <faction>
                             //
-                            $this->membersOf($sender);
+                            $this->membersOf($player);
                             break;
                         case 6:
                             //f officersof <faction>
                             //
-                            $this->officersOf($sender);
+                            $this->officersOf($player);
                             break;
                         case 7:
                             //f leaderof <faction>
                             //
-                            $this->leaderOf($sender);
+                            $this->leaderOf($player);
                             break;
                         case 8:
                             //f topfactions
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f topfactions");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f topfactions");
                             break;
                         case 9:
                             //f chat
-                            $this->getServer()->getCommandMap()->dispatch($sender, "f chat");
+                            $this->getServer()->getCommandMap()->dispatch($player, "f chat");
                             break;
                         case 10:
                             //Exit
-                            $this->menuForm($sender);
+                            $this->menuForm($player);
                     }
                 }
             });
@@ -377,9 +377,9 @@ class Main extends PluginBase implements Listener{
         }
     }
 
-    public function factionInfoForm($player){
+    public function factionInfoForm(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createCustomForm(function (Player $event, array $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $player = $event->getPlayer();
             $result = $data[0];
             if($result != null){
@@ -392,9 +392,9 @@ class Main extends PluginBase implements Listener{
         $form->sendToPlayer($player);
     }
 
-    public function membersOf($player){
+    public function membersOf(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createCustomForm(function (Player $event, array $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $player = $event->getPlayer();
             $result = $data[0];
             if($result != null){
@@ -407,9 +407,9 @@ class Main extends PluginBase implements Listener{
         $form->sendToPlayer($player);
     }
 
-    public function officersOf($player){
+    public function officersOf(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createCustomForm(function (Player $event, array $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $player = $event->getPlayer();
             $result = $data[0];
             if($result != null){
@@ -422,9 +422,9 @@ class Main extends PluginBase implements Listener{
         $form->sendToPlayer($player);
     }
 
-    public function leaderOf($player){
+    public function leaderOf(Player $player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createCustomForm(function (Player $event, array $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $player = $event->getPlayer();
             $result = $data[0];
             if($result != null){
